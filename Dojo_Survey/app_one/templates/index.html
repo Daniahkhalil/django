@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}		<!-- added this line -->
+    <link rel="stylesheet" href="{% static 'style.css' %}">    
+    <title>Dojo Survey</title>
+</head>
+<body>
+    <form action='/show' method='post'>
+        {% csrf_token %}
+        <div class="space">
+
+            <label for="yourname">Your Name:</label>
+            <input type="text" name="yourname">
+        </div>
+        <div class="space">
+            <label for="location">Dojo Location: </label> 
+            <select name="location">
+                <option>San Jose</option>
+            </select>
+        </div>
+     <div class="space">
+        <label for="fav">Favorite Language: </label> 
+        <select name="fav">
+            <option>python</option>
+            <option>Java</option>
+            <option>C</option>
+            <option>C++</option>
+        </select>
+     </div class="space"> 
+    
+    <div class="space">
+        <label for="free">Comment(optional):</label>
+        <input type="text" name="free" id="comment">
+    </div>
+ 
+        <input type="submit" value="Button" id="submit">
+    </form>
+
+
+</body>
+</html>

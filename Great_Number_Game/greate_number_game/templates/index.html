@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Views Counter</title>
+
+</head>
+<body>
+    
+                <h1  >Welcome to the Great Number Game</h1>
+                <P>I am thinking of a number between 1 and 100 <br> Take a guess!</P>
+                {% if request.session.counter <= 4 %}
+                    {% if request.session.random_number == request.session.guess  %}
+                        
+                                <p >{{request.session.random_number}} was the number <br>
+                                    <span>Number of attempts : {{request.session.counter}}</span></p>
+                                    <form action="/">
+                                        <button type="submit" >Play again !</button>
+                                    </form>
+                      
+                    {% elif request.session.random_number < request.session.guess %}
+                       
+                                <p class="card-text">Too High</p>
+                          
+                    {% elif request.session.random_number > request.session.guess  %}
+               
+                            <p >Too Low</p>
+                   
+                    {% endif %}
+                {% elif request.session.counter > 4 %}
+                   
+                            <p class="card-text">You Loose ! Game Over HA HA HA ! <br> Number of Attempts = {{request.session.counter}}</p>
+                      
+                    <form action="/">
+                        <button type="submit" class="btn btn-danger">Return and Play again !</button>
+                    </form>
+                {% endif %}
+      
+    
+                <form action="/number_game", method ="POST">
+                    {% csrf_token %}
+                
+                  
+                            <input type="number" min = "0" name = "randomint" class="form-control" id="floatingInput" placeholder="e.g. 10">
+                            <label for="floatingInput">Input Number</label>
+                            <button type="submit" class="btn btn-primary col-6 ms-5 mx-auto mt-3">Submit</button>
+                  
+                </form>
+       
+        
+
+</body>
+</html>

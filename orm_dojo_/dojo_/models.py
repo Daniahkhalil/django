@@ -12,7 +12,7 @@ class Dojo(models.Model):
     desc=models.TextField(default='old dojo')
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
-
+    
 class Ninja(models.Model):
     first_name=models.CharField(max_length=45)
     last_name=models.CharField(max_length=45)
@@ -21,4 +21,8 @@ class Ninja(models.Model):
     updated_at=models.DateTimeField(auto_now=True)
 
 
-    
+def list_of_all_dojos():
+    return Dojo.objects.all()
+
+# def create_dojo():
+

@@ -1,0 +1,14 @@
+input{
+    margin:5%
+}
+
+#first_part_adding{
+    width: 50%;
+    display: flex;
+    margin: 0 auto;
+}
+#dojos_ninjas_part{
+    width:50%;
+    margin: 0 auto;
+
+}

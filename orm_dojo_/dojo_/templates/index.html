@@ -4,9 +4,62 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dojos & Ninjas</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}"> 
 </head>
 <body>
-    <h1>hello!!!!!!!!!!</h1>
+    <div id="first_part_adding">
+
+
+    <form action='/Add_dojo' method='post'>
+        {% csrf_token %}
+    <h2>Add Dojo</h2>
+    <label >Name:</label>
+    <input type="text" name="dojo_name"  ><br>
+    <label>City:</label>
+    <input type="text" name="dojo_city" ><br>
+    <label>State:</label>
+    <input type="text" name="dojo_state" ><br>
+    <input type="submit" name="Add_dojo" value="Add"> 
+    </form>
+
+    <form action='/Add_ninja' method='post'>
+        {% csrf_token %}
+    <h2>Add a Ninja</h2>
+    <label >First Name:</label>
+    <input type="text" name="ninja_name" ><br>
+    <label >Last Name:</label>
+    <input type="text" name="Last_name" ><br>
+    <label >dojo:</label>
+    <select name="dojos_id" >
+        {% for dojo in list_of_dojos%}
+        <option   value="{{dojo.id}}"name="dojo_selected">{{dojo.name}}</option>
+        {% endfor %}
+ 
+     
+    </select><br>
+  
+    <input type="submit" name="Add_ninja" value="Add">
+    </form>
+    </div>
+    <div id="dojos_ninjas_part">
+    <hr>
+    <h1>All The Dojos</h1>
+    {% for dojo in list_of_dojos %}
+    {{dojo.name}}
+    {% for ninja in dojo.dojos.all %}
+    
+            
+            <ul><li>{{ninja.first_name}}</li></ul>
+  
+   
+   
+    
+    {% endfor %} 
+   {% endfor %}
+</div>
+   
+
 </body>
 </html>

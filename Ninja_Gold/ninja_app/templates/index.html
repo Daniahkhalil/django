@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}"> 
+</head>
+<body>
+    <form action="/process_money">
+        <label for="gold" >Your Gold:{{total_gold}}</label>
+        
+    </form>
+    <div>
+    <form action="/process_money" method="post" name="which_form" value="Farm">
+        {% csrf_token %}
+        <h2>Farm</h2>
+        <p >(earns 10-20 golds)</p>
+        <p></p>
+        <input type="hidden" name="sub_gold" value="farm">
+        <input type="submit" value="Find Gold!">
+
+    </form>
+
+    <form action="/process_money" method="post" name="which_form" value="cave">
+        {% csrf_token %}
+        <h2>Cave</h2>
+        <p>(earns 5-10 golds)</p>
+        <input type="hidden" name="sub_gold" value="Cave">
+        <input type="submit" value="Find Gold!">
+
+    </form>
+
+    <form action="/process_money" method="post" name="which_form" value="house">
+        {% csrf_token %}
+        <h2>House</h2>
+        <p>(earns 2-5 golds)</p>
+        <input type="hidden" name="sub_gold" value="House">
+        <input type="submit" value="Find Gold!">
+
+    </form>
+
+    <form action="/process_money" method="post" name="which_form" value="casino">
+        {% csrf_token %}
+        <h2>Casino</h2>
+        <p>(earns/takes 0-50 golds)</p>
+        <input type="hidden" name="sub_gold" value="Casino">
+        <input type="submit" value="Find Gold!">
+
+    </form>
+</div>
+
+    <label>Activties:</label>
+    <br>
+    <label>{{golds_earned}}</label>
+
+</body>
+</html>

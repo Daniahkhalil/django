@@ -1,0 +1,16 @@
+form{
+  width:50%;
+  
+}
+
+div{
+    display:flex;
+}
+
+input{
+    margin:1%;
+}
+
+table, th, td {
+    border: 1px solid;
+}

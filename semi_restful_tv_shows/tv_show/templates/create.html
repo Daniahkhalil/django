@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <form action="/create" method="post">
+        {% csrf_token %}
+    <h1>Add a New Show </h1>
+    <label>Title :</label>
+    <input type="text" name="title"><br>
+    <label>Network :</label>
+    <input type="text" name="network"><br>
+    <label>Relaase Date :</label>
+    <input type="date" name="release date"><br>
+    <input type="submit" value="Create"> 
+    <a href="/create/go_back">Go back</a>
+    </form>
+
+    
+</body>
+</html>

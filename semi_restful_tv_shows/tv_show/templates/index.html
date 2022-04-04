@@ -35,7 +35,7 @@
         {{show.release_date}}
     </td>
     <td>
-    <form action="/show/{{show.id}}" method="post">
+    <form action="/show/{{show.id}}">
         {% csrf_token %}
         <input type="hidden" name="show_id" value="{{show.id}}">
         <a href="/show/{{show.id}}" type="submit">Show</a> 

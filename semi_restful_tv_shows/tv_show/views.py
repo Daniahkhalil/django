@@ -3,6 +3,7 @@ from django.shortcuts import render,redirect
 
 from .models import *
 from . import models
+from django.contrib import messages
 
 # Create your views here.
 def index(reuqest):
@@ -28,17 +29,27 @@ def show_edit(request,id):
 
 def updated(request,id):
     object_show=Show.objects.get(id=id)
-    object_show.title=request.POST['title']
-    object_show.network=request.POST['network']
-    object_show.release_date=request.POST['release date']
+    errors =Show.objects.basic_validator(request.POST)
+    if len(errors) > 0:
+        for key, value in errors.items():
+            messages.error(request, value)
+        return redirect(f'/show/{object_show.id}/edit')
+    
+    else:
+        object_show.title=request.POST['title']
+        object_show.network=request.POST['network']
+        object_show.release_date=request.POST['release date']
+        object_show.save()
+      
     # context={
     #     "tilte":object_show.title,
     #     "newtwork":object_show.network,
     #     "release_date":object_show.release_date,
     # }
-    object_show.save()
-
     return redirect(f'/show/{object_show.id}')
+    
+
+    
 
 def delete_show(request,id):
     object_show=Show.objects.get(id=id)
@@ -48,10 +59,17 @@ def delete_show(request,id):
 
 
 def create_show(request):
-     return render(request,'create.html')
+    return render(request,'create.html')
 
 def create(request):
-    Show.objects.create(title=request.POST['title'],network=request.POST['network'],release_date=request.POST['release date'])
+    # print(Show.objects.basic_validator(request.POST))
+    errors =Show.objects.basic_validator(request.POST)
+    if len(errors) > 0:
+        for key, value in errors.items():
+            messages.error(request, value)
+
+    else:
+        Show.objects.create(title=request.POST['title'],network=request.POST['network'],release_date=request.POST['release date'])
     return redirect('/show/create')
 
 

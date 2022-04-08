@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Success</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}"> 
+</head>
+<body>
+    <form action="/logout">
+        {% csrf_token %}
+    <h1>Success! Welcome, {{name}} </h1>
+    <p>Successfully (or logged in)</p>
+    <a href="/logout" type="submit">Log out</a>
+    </form>
+    
+    <form action="/message" method="post">
+        {% csrf_token %}
+        <label>Post a Message :</label><br>
+        <input type="hidden" name="user" value="{{name}}">
+        <input type="text" name="message"><br>
+        <input type="submit" value="Post a Message">
+        <p>Post From  {{name}}:
+             {{text}}</p>
+    </form>
+
+    <form action="/comment" method="post">
+        {% csrf_token %}
+        {%if comment == None%}
+        <p>no comment</p>
+        {%else%}
+        <p>Comment From  {{name}} :{{comment}}</p>
+        {%endif%}
+        <label>Post a Comment :</label><br>
+        <input type="hidden" name="user" value="{{name}}">
+        <input type="hidden" name="comment_message" value="{{message_id}}">
+        <input type="text" name="comment"><br>
+        <input type="submit" value="Post a comment">
+     
+    </form>
+
+    <form action="/delete" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="delete_message" value="{{message_id}}">
+        <input type="hidden" name="user" value="{{name}}">
+
+        <input type="submit" value="Delete post ">
+    </form>
+
+
+</body>
+</html>

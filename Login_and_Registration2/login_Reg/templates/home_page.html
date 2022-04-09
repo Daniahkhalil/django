@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Success</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}"> 
+</head>
+<body>
+    <main>
+        <form action="/logout" method="post">
+        <h1>Successfully Logged In! Welcome , {{request.session.user_name}}</h1>
+        <h2>Data from context : {{user_name}} & user ID : {{user_id}}</h2>
+        <div>
+
+                {% csrf_token %}
+                <button type="submit"> LogOut</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

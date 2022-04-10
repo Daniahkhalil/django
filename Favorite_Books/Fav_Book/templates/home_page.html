@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Success</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}"> 
+</head>
+<body>
+
+
+        <h1>Successfully Logged In! Welcome , {{request.session.user_name}}</h1>
+        <h2>Data from context : {{user_name}} & user ID : {{user_id}}</h2>
+      
+        <div>
+            <form action="/logout" method="post">
+                {% csrf_token %}
+                <button type="submit"> LogOut</button>
+            </form>
+        </div>
+            <div>
+
+                <form action="/add_book" method="post">
+                    {% csrf_token %}
+                    <h1>Add Favorite Book</h1>
+                    <label>Title :</label>
+                    <input type="text" name="title" ><br>
+                    <label>Description :</label>
+                    <input type="text" name="desc"><br>
+                    <input type="submit" value="Add">
+                </form>
+
+            </div>
+            <div>
+                <h1>All Book</h1>
+
+
+                    {%for book in books %}
+                 <form action="/update_fav/{{book.id}}" method="post">
+                    {% csrf_token %}
+                    <a href="/update_fav/{{book.id}}" value="{{book.id}}" >{{book.title}}</a>
+                    <p>(Uploaded By : {{book.uploaded_by.first_name}} {{book.uploaded_by.last_name}})</p>
+                </form>
+                    {% endfor %}
+
+
+ 
+            </div>
+            {% if messages %}
+            <ul >    
+            {% for message in messages %}    
+                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+            {% endfor %}
+        </ul>
+        {% endif %}
+       
+
+  
+</body>
+</html>

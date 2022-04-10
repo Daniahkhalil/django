@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}"> 
+    <title>Favorite Book</title>
+</head>
+<body>
+    <h1>Welcome : {{user.first_name}} !</h1>
+    <form action="/logout" method="post">
+        {% csrf_token %}
+        <button type="submit"> LogOut</button>
+    </form>
+    <hr>
+    <h2>{{book.title}}</h2>
+    <h2>Added By :{{book.uploaded_by.first_name}} {{book.uploaded_by.last_name}}</h2>
+    <p>Created At: {{book.created_at}}</p>
+    <p>Updated At : {{book.updated_at}}</p>
+    <label for="desc">Description :</label>
+    <p name="desc" >{{book.desc}}</p>
+    <h1>Users Who Liked The Book :</h1>
+    <ul>
+        {%for who_fav in book.users_who_liked.all%}
+        {% if user.first_name == who_fav.first_name %}
+        <li> {{user.first_name}} <a href="/unfav/{{book.id}}" value="{{book.id}}">UnFavorite</a> </li>
+        {% else %}
+        <li>{{who_fav.first_name}}</li>
+        {% endif %}
+        {% endfor %}
+
+    </ul>
+
+
+    <form action="/adds_to_fav/{{book.id}}" method="post">
+        {% csrf_token %}
+    
+    <a href="/adds_to_fav/{{book.id}}" value="{{book.id}}">Add To Favorite</a>
+    </form>
+ 
+    
+</body>
+</html>

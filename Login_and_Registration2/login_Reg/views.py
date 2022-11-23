@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.db import models
 from .models import *
 from django.contrib import messages
+from django.utils.datastructures import MultiValueDictKeyError
 import bcrypt
 
 def index(request):
@@ -25,21 +26,29 @@ def register(request):
                 messages.error(request, value)
             return redirect('/')
         else:
-            password = request.POST['passward']
+            if 'confirm_password' in request.POST:
+                is_private = request.POST['confirm_password']
+            else:
+                is_private = False
+
+            print(is_private)
+            print('hellllo')
+            password = request.POST['password']
             pw_hash = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()  
             print(pw_hash)    
-            new_user=User.objects.create(
+            new_user=User(
             first_name=request.POST['first_name'],
             last_name=request.POST['last_name'],
             email=request.POST['email'],
             password=pw_hash)
             # if new_user is not None:
             #     if not request.session:
+            new_user.save()
             request.session['logged_user_id']= new_user.id
             print(new_user.id)
             request.session['user_name']= new_user.first_name
             print(new_user.first_name)
-            return redirect('/home')
+            return HttpResponse("regiser succssfully")
 
 def login(request ):
 

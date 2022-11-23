@@ -1,0 +1,43 @@
+
+input,table{
+    margin:0.5%;
+}
+
+
+
+table ,th ,td{
+    outline: 1px solid black;
+}
+
+#form{
+    display: flex;
+    justify-content: space-between;
+
+    
+}
+
+.log_dash{
+    display: inline-block;
+}
+
+label,p{
+    display: inline-block;
+}
+
+
+.label{
+    margin:0;
+
+}
+ 
+
+
+button{
+    background-color: black;
+    color: aliceblue;
+    
+}
+h1{
+margin: 0%;
+
+ }

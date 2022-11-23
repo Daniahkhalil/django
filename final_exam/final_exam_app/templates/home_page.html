@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Success</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}"> 
+</head>
+<body>
+        <div>
+        <form action="/logout" method="post">
+        <h1> Welcome To Car Dealz , {{request.session.user_name}} !!!</h1>
+
+
+            {% csrf_token %}
+            <button type="submit"> LogOut</button>
+        </form>
+    </div>
+    <hr>
+
+        <h1>Cars for Sale</h1>
+        <div>
+            <table>
+                <tr>
+                    <th>Model</th>
+                    <th>Year</th>
+                    <th>Seller</th>
+                    <th>Actions</th>
+                </tr>
+                {% for car in cars%}
+                <tr>
+                    <td>{{car.model}}</td>
+                    <td>{{car.year}}</td>
+                    {% if user_id == car.seller.id %}
+                    <td>{{car.seller.first_name}}</td>
+                    <td>
+                        <a href="#">Edit</a>
+                        <a href="#">Delete</a>
+                    </td>
+                    {% else %}
+                    <td>{{car.seller.first_name}}</td>
+                    <td><a href="#">View</a></td>
+                    {% endif %}
+
+
+
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <div>
+            <form action="/add_car" >
+            {% csrf_token %}
+            <button type="submit">Add A Car</button>
+        </form>
+    </div>
+
+
+</body>
+</html>

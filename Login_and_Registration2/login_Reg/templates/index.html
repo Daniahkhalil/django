@@ -5,23 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Index and Restiration</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     {% load static %}
     <link rel="stylesheet" href="{% static 'style.css' %}"> 
 </head>
 <body>
-    <form action="/reg_log" method="post">
+    <form action="/reg_log" method="post" id="post-form">
         {% csrf_token %}
     <h1>Registration</h1>
     <label>First Name :</label>
-    <input type="text" name="first_name"><br>
+    <input type="text" name="first_name" id="first_name"><br>
     <label>Last Name :</label>
-    <input type="text" name="last_name"><br>
+    <input type="text" name="last_name" id="last_name"><br>
     <label>Email :</label>
-    <input type="text" name="email"><br>
+    <input type="text" name="email" id="email"><br>
     <label>Passward :</label>
-    <input type="text"name="passward"><br>
+    <input type="password"name="password" id="password"><br>
     <label>Confirm PW :</label>
-    <input type="text" name="confirm_password"><br>
+    <input type="text" name="confirm_password" id="confirm_password"><br>
     <input type="submit" value="Regiser">
     </form>
 
@@ -31,8 +32,8 @@
     <label>Email :</label>
     <input type="text" name="email_log"><br>
     <label>Passward :</label>
-    <input type="text" name="Passward_log">
-    <input type="submit" value="Log in">
+    <input type="password" name="Passward_log">
+    <input type="submit" value="Log in" id="btnSubmit">
     </form>
     {% if messages %}
     <ul >    
@@ -41,7 +42,32 @@
     {% endfor %}
 </ul>
 {% endif %}
+<script>
 
+$(document).on('submit','#post-form',function(e){
+    e.preventDefault(); //prevent html page from reloading 
+        $.ajax({
+            type:'POST',
+            url : "reg_log",
+            data :{
+                first_name:$('#first_name').val(),
+                last_name:$('#last_name').val(),
+                email:$('#email').val(),
+                password:$('#password').val(),
+                csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+            },
+            success:function(data){
+                alert(data)
+
+            },
+
+
+        });
+});
+
+
+
+</script>
 
     
 </body>

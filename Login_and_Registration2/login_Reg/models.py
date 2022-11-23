@@ -14,12 +14,14 @@ class UserManager(models.Manager):
             EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
             if not EMAIL_REGEX.match(postData['email']):    # test whether a field matches the pattern            
                 errors['email'] = "Invalid email address!"
-            if len(postData['passward']) < 8:
-                errors["passward"] = "passward should be at least 8 characters"
-            if len(postData['confirm_password']) < 8:
-                errors["confirm_password"] = "confirm passward should be at least 8 characters"
-            if postData['passward'] != postData['confirm_password']:
-                errors["confirm_password"] = "passward and confirm passward not matched"
+
+            if len(postData['password']) < 3:
+                errors["password"] = "passward should be at least 3 characters"
+
+            # if postData['password'] != postData['confirm_password']:
+            #     errors["confirm_password"] = "passward and confirm passward not matched"
+                
+
   
 
             return errors

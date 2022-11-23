@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill Details</title>
+    {% load static %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+</head>
+<style>
+  .footer-dark{
+    background-color: black;
+  }
+  .whitetheme{
+    color: white;
+    font-family: cursive;
+  }
+  h2{
+    padding: 0;
+  margin: 0;
+  outline: none;
+  text-align: center;
+  font-family: cursive;
+  color: rgb(21, 20, 20);
+  }
+ </style>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Dania</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Files
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark">
+                  <li><a class="dropdown-item" href="home/cheque">Cheques</a></li>
+                  <li><a class="dropdown-item" href="home/draft">Bills</a></li>
+          
+                </ul>
+              </li>
+            </ul>
+
+       
+            <ul class="navbar-nav">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Reports
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark">
+                  <li><a class="dropdown-item" href="display_cheque">Returned checks</a></li>
+                  <li><a class="dropdown-item" href="display_draft">Bill reports </a></li>
+             
+          
+                </ul>
+              </li>
+            </ul>
+
+            <ul class="navbar-nav">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Tools
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark">
+                  <li><a class="dropdown-item" href="/admin">Users</a></li>
+                  <li><a class="dropdown-item" href="#">.....</a></li>
+          
+                </ul>
+              </li>
+            </ul>
+
+            <ul class="navbar-nav">
+              <li class="nav-item dropdown">
+                <form action="/logout" method="post" class="log_dash">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-dark"> LogOut</button>
+              </form >
+          
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <form action="/home">
+                            <button type="submit" class="btn btn-dark" >Home</button>
+                        </form>
+                
+                      </ul>
+              </li>
+            </ul>
+            
+          </div>
+        </div>
+      </nav>
+ 
+
+  
+    <br>
+    <section>
+    <!-- <form action="home/display_draft/update_my_draft/{{draft.id}}" method="post">
+        {% csrf_token %}
+        <input type="hidden" value="{{draft.id}}" >
+        <label >Name :</label>
+        <input type="text" id="name" name="draftname" required
+               minlength="4" maxlength="8" size="10" value="{{draft.billame}}"> <br>
+
+        <label >Bill Date :</label>
+        <input type="date" name="draftdate" required
+        minlength="4" maxlength="8" size="10" value="{{draft.billdate|date:'Y-m-d'}}"> <br>
+
+
+        <label >Bill Number :</label>
+        <input type="number" name="draftnumber" required
+        minlength="4" maxlength="8" size="10" value="{{draft.billnumber}}"> <br>
+
+        <label >Amount :</label>
+        <input type="number" step="0.1" name="draftprice" required
+        minlength="4" maxlength="8" size="10" value="{{draft.billprice}}"> <br>
+  
+        <label > Choose Status:</label>
+        <select id="state" name="draftstatus"  value="{{draft.billstatus}}">
+        <option value="Existing">Existing</option>
+        <option value="Lawyer">Lawyer</option>
+        <option value="Done">Done</option>
+        <option value="retuned">Returned To Customer</option>
+    
+        </select><br>
+
+       
+        <input type="submit" class="btn btn-dark" value="Update">
+    </form> -->
+
+    <h2 >Update Bill   <i class="fas fa-file"></i></h2>
+ 
+    <hr>
+
+  <form class="row g-4"action="home/display_draft/update_my_draft/{{draft.id}}" method="post">
+    {% csrf_token %}
+    <input type="hidden" value="{{draft.id}}" >
+     <div class="col-md-4">
+
+    
+      <label >Name :</label>
+      <input type="text" id="name" name="draftname" required class="form-control"
+             minlength="4" maxlength="20" size="10" value="{{draft.billame}}">
+    </div> 
+ 
+    <div class="col-md-4">
+      <label >Bill Date :</label>
+      <input type="date" name="draftdate" required class="form-control"
+      minlength="4" maxlength="8" size="10" value="{{draft.billdate|date:'Y-m-d'}}">
+      
+    </div> 
+
+    <div class="col-md-4">
+    
+
+      <label >Bill Number :</label>
+        <input type="number" name="draftnumber" required class="form-control"
+        minlength="4" maxlength="8" size="10" value="{{draft.billnumber}}">
+    </div> 
+    
+    <div class="col-md-4">
+      <label >Amount :</label>
+      <input type="number" step="0.1" name="draftprice" required class="form-control"
+      minlength="4" maxlength="8" size="10" value="{{draft.billprice}}">
+      
+    </div>
+    
+     
+ 
+  <div class="col-md-4">
+      <label > Choose Status:</label>
+      <select id="state" name="draftstatus"  value="{{draft.billstatus}}" class="form-control">
+      <option value="Existing">Existing</option>
+      <option value="Lawyer">Lawyer</option>
+      <option value="Done">Done</option>
+      <option value="retuned">Returned To Customer</option>
+  
+      </select>
+  </div>
+    <div class="col-12">
+      
+      <button type="submit" class="btn btn-outline-dark">Update Bill</button>
+    </div>
+   
+  </form>
+  
+    </section>
+    <br>
+    <div class="footer-dark">
+      <footer>
+          <div class="container">
+              <div class="row">
+                  <div class="col-sm-6 col-md-3 item">
+                      <h3 class="whitetheme">Services</h3>
+                      <ul>
+                          <li class="whitetheme" ><a class="whitetheme" href="#">Web design</a></li>
+                          <li class="whitetheme"><a class="whitetheme" href="#">Development</a></li>
+                          <li class="whitetheme"><a class="whitetheme" href="#">Hosting</a></li>
+                      </ul>
+                  </div>
+                  <div class="col-sm-6 col-md-3 item">
+                      <h3 class="whitetheme">About</h3>
+                      <ul>
+                          <li class="whitetheme" ><a class="whitetheme" href="#">Company</a></li>
+                          <li class="whitetheme"><a class="whitetheme" href="#">Team</a></li>
+                          <li class="whitetheme"><a class="whitetheme" href="#">Careers</a></li>
+                      </ul>
+                  </div>
+                  <div class="col-md-6 item text">
+                      <h3 class="whitetheme">Company Name</h3>
+                      <p class="whitetheme">Praesent sed lobortis mi. Suspendisse vel placerat ligula. Vivamus ac sem lacus. Ut vehicula rhoncus elementum. Etiam quis tristique lectus. Aliquam in arcu eget velit pulvinar dictum vel in justo.</p>
+                  </div>
+                  
+              </div>
+              <p class="whitetheme">Company Name © 2018</p>
+          </div>
+      </footer>
+  </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>

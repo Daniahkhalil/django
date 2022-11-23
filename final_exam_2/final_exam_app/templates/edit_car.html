@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Dealz</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}"> 
+</head>
+<body>
+    <h1>Edit {{car.model}}</h1>
+    <form action="/logout" method="post">
+            {% csrf_token %}
+            <button type="submit"> LogOut</button>
+        </form >
+    <form action="/back_to_dashboard">
+        <button type="submit" >Dashboard</button>
+    </form>
+    <hr>
+    
+    <form action="/update_my_car/{{car.id}}" method="post">
+        {% csrf_token %}
+        <input type="hidden" value="{{car.id}}" >
+        <label for="price">Price:</label>
+        <input type="number" name="price" step="0.01" value="{{car.price}}"><br>
+    
+        <label for="model">Model:</label>
+        <input type="text" name="model" value="{{car.model}} " ><br>
+    
+        <label for="make">Make:</label>
+        <input type="text" name="make" value="{{car.make}}"><br>
+    
+        <label for="year">Year:</label>
+        <input type="date" name="year" value="{{car.year|date:'Y-m-d'}}"><br>
+    
+        <label for="desc"> Description</label>
+        <input type="text" name="desc" value="{{car.desc}}"><br>
+        <input type="submit" value="Update">
+    </form>
+</body>
+</html>

@@ -1,0 +1,18 @@
+
+  .footer-dark{
+    background-color: black;
+  }
+  .whitetheme{
+    color: white;
+    font-family: cursive;
+  }
+  h2{
+    padding: 0;
+  margin: 0;
+  outline: none;
+  text-align: center;
+  font-family: cursive;
+  color: rgb(21, 20, 20);
+  }
+
+ 

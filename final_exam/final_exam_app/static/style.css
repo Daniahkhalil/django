@@ -1,0 +1,11 @@
+input{
+    margin:0.5%;
+}
+
+form{
+    margin:0.5%;
+}
+
+table ,th ,td{
+    outline: 1px solid black;
+}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Dealz</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}"> 
+</head>
+<body>
+    <form action="/logout" method="post" class="log_dash">
+        {% csrf_token %}
+        <button type="submit"> LogOut</button>
+    </form >
+<form action="/back_to_dashboard" class="log_dash">
+    <button type="submit" >Dashboard</button>
+</form>
+<hr>
+   <div id="info">
+       <p >{{car.price}}</p><br>
+
+       <label class="label">Model:</label>
+       <p>{{car.model}}</p><br>
+
+       <label class="label">Make:</label>
+       <p>{{car.make}}</p><br>
+
+       <label class="label">Year:</label>
+       <p>{{car.year}}</p><br>
+
+       <label class="label">Description:</label>
+       <p>{{car.desc}}</p><br>
+
+       <label class="label">seller</label>
+       <p>{{car.seller.first_name}} {{car.seller.last_name}}</p><br>
+
+       <form action="/delete_from_db/{{car.id}}" method="post">
+        {% csrf_token %}
+           <input type="hidden" value="{{car.id}}">
+           <button type="submit"> Purchase</button>
+           
+       </form>
+
+   </div>
+</body>
+</html>

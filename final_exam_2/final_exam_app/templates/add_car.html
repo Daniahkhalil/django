@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Dealz</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}"> 
+</head>
+<body>
+   
+   
+    <form action="/logout" method="post">
+        {% csrf_token %}
+        <h1>Put Car Up For Sale</h1>
+        <button type="submit"> LogOut</button>
+    </form >
+<form action="/back_to_dashboard">
+    <button type="submit" >Dashboard</button>
+</form>
+<hr>
+
+    <form action="/add_car_to_dashboard" method="post">
+        {% csrf_token %}
+        <label for="price">Price:</label>
+        <input type="number" name="price" step="0.01" min="0" ><br>
+    
+        <label for="model">Model:</label>
+        <input type="text" name="model"><br>
+    
+        <label for="make">Make:</label>
+        <input type="text" name="make"><br>
+    
+        <label for="year">Year:</label>
+        <input type="date" name="year" min="0"><br>
+    
+        <label for="desc"> Description</label>
+        <input type="text" name="desc"><br>
+        <button type="submit" >Add</button>
+    </form>
+    {% if messages %}
+    <ul >    
+    {% for message in messages %}    
+        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+    {% endfor %}
+</ul>
+{% endif %}
+
+</body>
+</html>

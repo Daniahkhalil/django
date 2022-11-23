@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Dealz</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}"> 
+</head>
+<body>
+    <h1>Put Car Up For Sale</h1>
+   
+
+    <form action="/add_car_to_dashboard" method="post">
+        {% csrf_token %}
+        <label for="price">Price:</label>
+        <input type="number" name="price" step="0.01"><br>
+    
+        <label for="model">Model:</label>
+        <input type="text" name="model"><br>
+    
+        <label for="model">Make:</label>
+        <input type="text" name="make"><br>
+    
+        <label for="year">Year:</label>
+        <input type="date" name="year" placeholder="0"><br>
+    
+        <label for="desc"> Description</label>
+        <input type="text" name="desc"><br>
+        <input type="submit" value="Add">
+    </form>
+
+
+</body>
+</html>
